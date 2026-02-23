@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot name="k_rover" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<gazebo reference="base_front_left_wheel">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+</gazebo>
+
+<gazebo reference="base_front_right_wheel">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+</gazebo>
+
+<gazebo reference="base_rear_left_wheel">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+</gazebo>
+
+<gazebo reference="base_rear_right_wheel">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+</gazebo>
+    <!-- <gazebo> tagi, URDF dosyası içindeki "simülatöre özel" talimatları barındırır. -->
+    <gazebo>
+        <plugin filename="gz-sim-diff-drive-system"
+                name="gz::sim::systems::DiffDrive" >
+                <left_joint>base_front_left_wheel_joint</left_joint>
+                <left_joint>base_rear_left_wheel_joint</left_joint>
+                <right_joint>base_front_right_wheel_joint</right_joint>
+                <right_joint>base_rear_right_wheel_joint</right_joint>
+                <!-- wheel_seperation -> tekerleklerin merkezleri arasındaki uzaklık -->
+                <wheel_separation>0.5</wheel_separation>
+                <wheel_radius>0.08</wheel_radius>
+                <topic>/model/k_rover/cmd_vel</topic>
+                <odom_topic>/model/k_rover/odom</odom_topic>
+                <frame_id>odom</frame_id>
+                <!-- Bu sistemin içinde hareket eden çocuk parçanın adı ne -->
+                <child_frame_id>base_footprint</child_frame_id>
+        </plugin>
+    </gazebo>
+
+    <gazebo>
+        <plugin
+            filename="gz-sim-joint-state-publisher-system"
+            name="gz::sim::systems::JointStatePublisher" >
+            <joint_name>base_front_left_wheel_joint</joint_name>
+            <joint_name>base_front_right_wheel_joint</joint_name>
+            <joint_name>base_rear_left_wheel_joint</joint_name>
+            <joint_name>base_rear_right_wheel_joint</joint_name>
+        </plugin>
+    </gazebo>
+
+</robot>

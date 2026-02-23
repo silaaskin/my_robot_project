@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <gazebo reference="caster_wheel_link">
+    <gazebo reference="sphere_wheel_link">
         <mu1 value="0.1" />
         <mu2 value="0.1" /> 
     </gazebo>
@@ -14,6 +14,8 @@
                 <!-- wheel_seperation -> tekerleklerin merkezleri arasındaki uzaklık -->
                 <wheel_separation>0.45</wheel_separation>
                 <wheel_radius>0.1</wheel_radius>
+                <topic>/model/my_robot/cmd_vel</topic>
+                <odom_topic>/model/my_robot/odom</odom_topic>
                 <frame_id>odom</frame_id>
                 <!-- Bu sistemin içinde hareket eden çocuk parçanın adı ne -->
                 <child_frame_id>base_footprint</child_frame_id>
